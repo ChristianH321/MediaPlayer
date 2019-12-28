@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="MediaPlayer101.jnlp">
+    <information>
+        <title>MediaPlayer101</title>
+        <vendor>chris</vendor>
+        <description>null</description>
+        <offline-allowed/>
+    </information>
+    <update check="always"/>
+    <resources>
+        <j2se version="9.0.4+" href="http://java.sun.com/products/autodl/j2se"/>
+        <jar href="MediaPlayer101.jar" size="3321" download="eager"/>
+    </resources>
+    <jfx:javafx-desc width="800" height="600" main-class="mediaplayer101.MediaPlayer101" name="MediaPlayer101"/>
+</jnlp>
+
