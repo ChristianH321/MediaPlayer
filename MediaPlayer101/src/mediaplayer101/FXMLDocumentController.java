@@ -8,6 +8,8 @@ package mediaplayer101;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,8 +46,57 @@ public class FXMLDocumentController implements Initializable {
         Media media = new Media(filePath);
         mediaplayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaplayer);
+            DoubleProperty width = mediaView.fitWidthProperty();
+            DoubleProperty height = mediaView.fitHeightProperty();
+            
+            width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+            height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+        
+        
+        
         mediaplayer.play();
         }
+    }
+    
+    @FXML
+    private void pauseVideo(ActionEvent event) {
+        mediaplayer.pause();
+    }
+    
+    @FXML
+    private void playVideo(ActionEvent event) {
+        mediaplayer.play();
+        mediaplayer.setRate(1);
+    }
+    
+    @FXML
+    private void stopVideo(ActionEvent event) {
+        mediaplayer.stop();
+    }
+    
+    @FXML
+    private void fastVideo(ActionEvent event) {
+        mediaplayer.setRate(1.5);
+    }
+    
+    @FXML
+    private void fasterVideo(ActionEvent event) {
+        mediaplayer.setRate(2);
+    }
+    
+    @FXML
+    private void slowVideo(ActionEvent event) {
+        mediaplayer.setRate(0.75);
+    }
+    
+    @FXML
+    private void slowerVideo(ActionEvent event) {
+        mediaplayer.setRate(0.5);
+    }
+    
+    @FXML
+    private void exitVideo(ActionEvent event) {
+        System.exit(0);
     }
     
     @Override

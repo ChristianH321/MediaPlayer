@@ -8,7 +8,7 @@
     <update check="always"/>
     <resources>
         <j2se version="9.0.4+" href="http://java.sun.com/products/autodl/j2se"/>
-        <jar href="MediaPlayer101.jar" size="3321" download="eager"/>
+        <jar href="MediaPlayer101.jar" size="3922" download="eager"/>
     </resources>
     <jfx:javafx-desc width="800" height="600" main-class="mediaplayer101.MediaPlayer101" name="MediaPlayer101"/>
 </jnlp>
