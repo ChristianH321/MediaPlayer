@@ -8,15 +8,23 @@ package mediaplayer101;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 /**
  *
@@ -31,6 +39,12 @@ public class FXMLDocumentController implements Initializable {
     private MediaView mediaView;
     
     private String filePath;
+    
+    @FXML
+    private Slider slider;
+    
+    @FXML
+    private Slider seekSlider;
     
     
     
@@ -52,7 +66,27 @@ public class FXMLDocumentController implements Initializable {
             width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
             height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
         
+            slider.setValue(mediaplayer.getVolume() *100);
+            slider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                mediaplayer.setVolume(slider.getValue()/100);
+            }
+            });
         
+            mediaplayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+               seekSlider.setValue(newValue.toSeconds());
+            }
+            });
+            
+            seekSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mediaplayer.seek(Duration.seconds(seekSlider.getValue()));
+            }
+            });
         
         mediaplayer.play();
         }
